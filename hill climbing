@@ -1,92 +1,43 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": [],
-      "authorship_tag": "ABX9TyOzlhEaigEiaBdZOJquKqgC",
-      "include_colab_link": true
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "view-in-github",
-        "colab_type": "text"
-      },
-      "source": [
-        "<a href=\"https://colab.research.google.com/github/ruturajsahu4545-dot/BFS-/blob/main/Untitled7.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "execution_count": 9,
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "2cU_KCHsQeNp",
-        "outputId": "f7d36d67-dc3f-4993-abbf-b843a763440a"
-      },
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "Enter the starting point: 1\n",
-            "Enter the step size: 1\n",
-            "Enter maximum iterations: 10\n",
-            "\n",
-            "Best position = 5.0\n",
-            "Maximum value = 100.0\n"
-          ]
-        }
-      ],
-      "source": [
-        "#objective function\n",
-        "def objective_function(x):\n",
-        "  return -4*(x-5)**2+100\n",
-        "\n",
-        "#hill climbing function\n",
-        "def hill_climbing(start, step_size, max_iterations):\n",
-        "  current = start\n",
-        "  current_value = objective_function(current)\n",
-        "\n",
-        "  for i in range(max_iterations):\n",
-        "    left = current - step_size\n",
-        "    right = current + step_size\n",
-        "    left_value = objective_function(left)\n",
-        "    right_value = objective_function(right)\n",
-        "\n",
-        "    # Move to the better neighbour\n",
-        "    if left_value > current_value:\n",
-        "      current = left\n",
-        "      current_value = left_value\n",
-        "    elif right_value > current_value:\n",
-        "      current = right\n",
-        "      current_value = right_value\n",
-        "    else:\n",
-        "      break # No better neighbor found, stop search\n",
-        "\n",
-        "  return current, current_value\n",
-        "\n",
-        "# Main program\n",
-        "start_point = float(input(\"Enter the starting point: \"))\n",
-        "step = float(input(\"Enter the step size: \"))\n",
-        "iterations = int(input(\"Enter maximum iterations: \"))\n",
-        "\n",
-        "best_position, best_value = hill_climbing(start_point, step, iterations)\n",
-        "print(\"\\nBest position =\", best_position)\n",
-        "print(\"Maximum value =\", best_value)\n"
-      ]
-    }
-  ]
-}
+#objective function
+def objective_function(x):
+  return -4*(x-5)**2+100
+
+#hill climbing function
+def hill_climbing(start, step_size, max_iterations):
+  current = start
+  current_value = objective_function(current)
+
+  for i in range(max_iterations):
+    left = current - step_size
+    right = current + step_size
+    left_value = objective_function(left)
+    right_value = objective_function(right)
+
+    # Move to the better neighbour
+    if left_value > current_value:
+      current = left
+      current_value = left_value
+    elif right_value > current_value:
+      current = right
+      current_value = right_value
+    else:
+      break # No better neighbor found, stop search
+
+  return current, current_value
+
+# Main program
+start_point = float(input("Enter the starting point: "))
+step = float(input("Enter the step size: "))
+iterations = int(input("Enter maximum iterations: "))
+
+best_position, best_value = hill_climbing(start_point, step, iterations)
+print("\nBest position =", best_position)
+print("Maximum value =", best_value)
+
+#o/p
+Enter the starting point: 1
+Enter the step size: 1
+Enter maximum iterations: 10
+
+Best position = 5.0
+Maximum value = 100.0
