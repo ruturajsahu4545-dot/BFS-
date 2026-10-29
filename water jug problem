@@ -136,3 +136,15 @@
     }
   ]
 }
+
+output:
+Enter capacity of Jug 1: 4
+Enter capacity of Jug 2: 3
+Enter target amount: 2
+
+Steps to reach the target:
+(0, 0)
+(0, 3)
+(3, 0)
+(3, 3)
+(4, 2)
