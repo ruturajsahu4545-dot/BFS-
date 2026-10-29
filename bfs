@@ -1,84 +1,35 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": [],
-      "authorship_tag": "ABX9TyOfO6KYPjDwF2/o6gnXQPMB",
-      "include_colab_link": true
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "view-in-github",
-        "colab_type": "text"
-      },
-      "source": [
-        "<a href=\"https://colab.research.google.com/github/ruturajsahu4545-dot/BFS-/blob/main/bfs\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "\n",
-        "from collections import deque\n",
-        "\n",
-        "def bfs(graph, start):\n",
-        "    visited = set()\n",
-        "    queue = deque([start])\n",
-        "\n",
-        "    while queue:\n",
-        "        node = queue.popleft()\n",
-        "\n",
-        "        if node not in visited:\n",
-        "            print(node, end=\" \")\n",
-        "            visited.add(node)\n",
-        "\n",
-        "            for neighbor in graph[node]:\n",
-        "                if neighbor not in visited:\n",
-        "                    queue.append(neighbor)\n",
-        "\n",
-        "\n",
-        "graph = {\n",
-        "    'A': ['B', 'C'],\n",
-        "    'B': ['D', 'E'],\n",
-        "    'C': ['F', 'G'],\n",
-        "    'D': [],\n",
-        "    'E': [],\n",
-        "    'F': [],\n",
-        "    'G': []\n",
-        "}\n",
-        "\n",
-        "print(\"BFS Traversal:\")\n",
-        "bfs(graph, 'A')\n"
-      ],
-      "metadata": {
-        "id": "xoqikdX7GSkA",
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "outputId": "10f49b9d-c7f9-43c2-99ad-d407ada09c69"
-      },
-      "execution_count": 13,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "BFS Traversal:\n",
-            "A B C D E F G "
-          ]
-        }
-      ]
-    }
-  ]
+
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+
+    while queue:
+        node = queue.popleft()
+
+        if node not in visited:
+            print(node, end=" ")
+            visited.add(node)
+
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': []
 }
+
+print("BFS Traversal:")
+bfs(graph, 'A')
+
+output:
+BFS Traversal:
+A B C D E F G 
