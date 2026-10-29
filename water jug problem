@@ -1,0 +1,138 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPSLRu6mJDAIb2L/62xDthE",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ruturajsahu4545-dot/BFS-/blob/main/water%20jug%20problem\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Thns6Gvt_zwX",
+        "outputId": "5ebc8e15-e8e9-403c-e9a3-68c5944022b3"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter capacity of Jug 1: 4\n",
+            "Enter capacity of Jug 2: 3\n",
+            "Enter target amount: 2\n",
+            "\n",
+            "Steps to reach the target:\n",
+            "(0, 0)\n",
+            "(0, 3)\n",
+            "(3, 0)\n",
+            "(3, 3)\n",
+            "(4, 2)\n"
+          ]
+        }
+      ],
+      "source": [
+        "# DT : 1/10/26\n",
+        "# exp: WATER JUG PROBLEM\n",
+        "\n",
+        "from collections import deque\n",
+        "\n",
+        "# Function to solve Water Jug Problem using BFS\n",
+        "def water_jug(capacity1, capacity2, target):\n",
+        "    visited = set()\n",
+        "    queue = deque()\n",
+        "    # Initial state: both jugs are empty\n",
+        "    queue.append((0, 0, []))\n",
+        "    while queue:\n",
+        "        jug1, jug2, path = queue.popleft()\n",
+        "        # Skip if state is already visited\n",
+        "        if (jug1, jug2) in visited:\n",
+        "            continue\n",
+        "        visited.add((jug1, jug2))\n",
+        "        # add current state to path\n",
+        "        path = path + [(jug1, jug2)]\n",
+        "\n",
+        "        # Check if target is reached\n",
+        "        if jug1 == target or jug2 == target:\n",
+        "            return path\n",
+        "\n",
+        "        # Generate possible next states\n",
+        "        next_states = [\n",
+        "\n",
+        "            # Fill Jug 1\n",
+        "            (capacity1, jug2),\n",
+        "\n",
+        "            # Fill Jug 2\n",
+        "            (jug1, capacity2),\n",
+        "\n",
+        "            # Empty Jug 1\n",
+        "            (0, jug2),\n",
+        "\n",
+        "            # Empty Jug 2\n",
+        "            (jug1, 0),\n",
+        "\n",
+        "            # Pour Jug 1 -> Jug 2\n",
+        "            (\n",
+        "                jug1 - min(jug1, capacity2 - jug2),\n",
+        "                jug2 + min(jug1, capacity2 - jug2)\n",
+        "            ),\n",
+        "\n",
+        "            # Pour Jug 2 -> Jug 1\n",
+        "            (\n",
+        "                jug1 + min(jug2, capacity1 - jug1),\n",
+        "                jug2 - min(jug2, capacity1 - jug1)\n",
+        "            )\n",
+        "        ]\n",
+        "\n",
+        "        # Add new states to queue\n",
+        "        for state in next_states:\n",
+        "            if state not in visited:\n",
+        "                queue.append((state[0], state[1], path))\n",
+        "\n",
+        "    # No solution found\n",
+        "    return None\n",
+        "\n",
+        "\n",
+        "# Main program\n",
+        "\n",
+        "jug1 = int(input(\"Enter capacity of Jug 1: \"))\n",
+        "jug2 = int(input(\"Enter capacity of Jug 2: \"))\n",
+        "target = int(input(\"Enter target amount: \"))\n",
+        "\n",
+        "solution = water_jug(jug1, jug2, target)\n",
+        "\n",
+        "if solution:\n",
+        "    print(\"\\nSteps to reach the target:\")\n",
+        "\n",
+        "    for step in solution:\n",
+        "        print(step)\n",
+        "\n",
+        "else:\n",
+        "    print(\"No solution exists.\")"
+      ]
+    }
+  ]
+}
