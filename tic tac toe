@@ -1,0 +1,63 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN0+ab/5w/Xzr7EPCDmBwpw"
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "source": [
+        "def evaluate(board):\n",
+        "    # Returns +10 if AI wins, -10 if Human wins, 0 if draw/ongoing\n",
+        "    if check_win(board, 'X'): return 10\n",
+        "    if check_win(board, 'O'): return -10\n",
+        "    return 0\n",
+        "\n",
+        "def minimax(board, depth, is_maximizing):\n",
+        "    score = evaluate(board)\n",
+        "\n",
+        "    # Base cases: If the game is over, return the score\n",
+        "    if score == 10: return score - depth  # Subtract depth to prefer quicker wins\n",
+        "    if score == -10: return score + depth # Add depth to prolong the game if losing\n",
+        "    if not any('_' in row for row in board): return 0\n",
+        "\n",
+        "    if is_maximizing:\n",
+        "        best_score = -float('inf')\n",
+        "        for r in range(3):\n",
+        "            for c in range(3):\n",
+        "                if board[r][c] == '_':\n",
+        "                    board[r][c] = 'X' # Make move\n",
+        "                    score = minimax(board, depth + 1, False)\n",
+        "                    board[r][c] = '_' # Undo move (Backtrack)\n",
+        "                    best_score = max(score, best_score)\n",
+        "        return best_score\n",
+        "    else:\n",
+        "        best_score = float('inf')\n",
+        "        for r in range(3):\n",
+        "            for c in range(3):\n",
+        "                if board[r][c] == '_':\n",
+        "                    board[r][c] = 'O' # Make move\n",
+        "                    score = minimax(board, depth + 1, True)\n",
+        "                    board[r][c] = '_' # Undo move\n",
+        "                    best_score = min(score, best_score)\n",
+        "        return best_score"
+      ],
+      "metadata": {
+        "id": "B7Kj1OdAB3d-"
+      },
+      "execution_count": 5,
+      "outputs": []
+    }
+  ]
+}
